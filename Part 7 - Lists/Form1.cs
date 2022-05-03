@@ -18,7 +18,9 @@ namespace Part_7___Lists
         int numberIndex;
         int numberValue;
         string heroesValue;
+        string heroesValueUpper;
         string heroesValueAdd;
+        string heroesValueAddUpper;
         public Form1()
         {
             InitializeComponent();
@@ -31,26 +33,11 @@ namespace Part_7___Lists
                 numbers.Add(generator.Next(100));
             }
             lstNumbers.DataSource = numbers;
-            heroes.Add("Superman");
-            heroes.Add("Batman");
+            heroes.Add("SUPERMAN");
+            heroes.Add("BATMAN");
             lstHeroes.DataSource = heroes;
         }
 
-        private void btnSortNumbers_Click(object sender, EventArgs e)
-        {
-            numbers.Sort();
-            lstNumbers.DataSource = null;
-            lstNumbers.DataSource = numbers;
-            lblStatus.Text = ("Status: Numbers Sorted");
-        }
-
-        private void btnSortHeroes_Click(object sender, EventArgs e)
-        {
-            heroes.Sort();
-            lstHeroes.DataSource = null;
-            lstHeroes.DataSource = heroes;
-            lblStatus.Text = ("Status: Heroes Sorted");
-        }
 
         private void btnNewNumbers_Click(object sender, EventArgs e)
         {
@@ -67,8 +54,8 @@ namespace Part_7___Lists
         private void btnNewHeroes_Click(object sender, EventArgs e)
         {
             heroes.Clear();
-            heroes.Add("Superman");
-            heroes.Add("Batman");
+            heroes.Add("SUPERMAN");
+            heroes.Add("BATMAN");
             lstHeroes.DataSource = heroes;
             lblStatus.Text = ("Status: Heroes List Reset");
         }
@@ -109,21 +96,58 @@ namespace Part_7___Lists
         {
             heroesValue = txtRemoveHero.Text;
             heroesValue = heroesValue.Trim();
-            heroes.Remove(heroesValue);
+            heroesValueUpper = heroesValue.ToUpper();
+            heroes.Remove(heroesValueUpper);
             lstHeroes.DataSource = null;
             lstHeroes.DataSource = heroes;
             lblStatus.Text = ("Status: Hero Removed");
+            txtRemoveHero.Text = "";
         }
 
         private void btnAddHero_Click(object sender, EventArgs e)
         {
             heroesValueAdd = txtAddHero.Text;
             heroesValueAdd = heroesValueAdd.Trim();
-            heroesValueAdd = heroesValueAdd.ToUpperInvariant;
-            heroes.Add(heroesValueAdd);
+            heroesValueAddUpper = heroesValueAdd.ToUpper();
+            heroes.Add(heroesValueAddUpper);
             lstHeroes.DataSource = null;
             lstHeroes.DataSource = heroes;
             lblStatus.Text = ("Status: Hero Added");
+            txtAddHero.Text = "";
+        }
+
+        private void btnSortHeroesAscending_Click(object sender, EventArgs e)
+        {
+            heroes.Sort();
+            lstHeroes.DataSource = null;
+            lstHeroes.DataSource = heroes;
+            lblStatus.Text = ("Status: Heroes Sorted - Ascending A-Z");
+        }
+
+        private void btnSortNumbersAscending_Click(object sender, EventArgs e)
+        {
+            numbers.Sort();
+            lstNumbers.DataSource = null;
+            lstNumbers.DataSource = numbers;
+            lblStatus.Text = ("Status: Numbers Sorted - Ascending A-Z");
+        }
+
+        private void btnSortNumbersDescending_Click(object sender, EventArgs e)
+        {
+            numbers.Sort();
+            numbers.Reverse();
+            lstNumbers.DataSource = null;
+            lstNumbers.DataSource = numbers;
+            lblStatus.Text = ("Status: Numbers Sorted - Descending Z-A");
+        }
+
+        private void btnSortHeroesDescending_Click(object sender, EventArgs e)
+        {
+            heroes.Sort();
+            heroes.Reverse();
+            lstHeroes.DataSource = null;
+            lstHeroes.DataSource = heroes;
+            lblStatus.Text = ("Status: Heroes Sorted - Descending Z-A");
         }
     }
 }
